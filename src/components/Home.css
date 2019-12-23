@@ -12,6 +12,21 @@
   font-weight: bold;
 }
 
+.nav-pills {
+  display: inline-block;
+  margin: 0 40px;
+}
+
+.nav-pills a {
+  list-style: none;
+  text-decoration: none;
+  color: #F44336;
+  padding: 2px 5px;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
 .sort-form {
   display: inline-block;
   margin-left: 20px;

@@ -29,7 +29,6 @@ class Home extends Component {
   }
 
   onChange(e) {
-    console.log(e.target.value);
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -52,7 +51,6 @@ class Home extends Component {
   }
 
   sortButtonClick(e) {
-    console.log('sorrt');
     e.preventDefault();
 
     switch (this.state.sortName) {
@@ -77,13 +75,48 @@ class Home extends Component {
           .then(res => {
             quickSort(res)
               .then(result => {
-
+                let resSize = result.arrayStates.length;
+                for (let i = 0; i < resSize; i++) {
+                  setTimeout(() => {
+                    this.setState({
+                      array: result.arrayStates[i]
+                    });
+                  }, 150*i);
+                }
               });
           })
         break;
       case "heapSort":
+        generateRandomArray(Number.parseInt(this.state.size))
+          .then(res => {
+            heapSort(res)
+              .then(result => {
+                let resSize = result.arrayStates.length;
+                for (let i = 0; i < resSize; i++) {
+                  setTimeout(() => {
+                    this.setState({
+                      array: result.arrayStates[i]
+                    });
+                  }, 150*i);
+                }
+              });
+          })
         break;
       case "bubbleSort":
+        generateRandomArray(Number.parseInt(this.state.size))
+          .then(res => {
+            bubbleSort(res)
+              .then(result => {
+                let resSize = result.arrayStates.length;
+                for (let i = 0; i < resSize; i++) {
+                  setTimeout(() => {
+                    this.setState({
+                      array: result.arrayStates[i]
+                    });
+                  }, 150*i);
+                }
+              });
+          })
         break;
       case "randomQuickSort":
         break;
@@ -96,7 +129,7 @@ class Home extends Component {
     return (
       <Fragment>
         <header className="navbar">
-          <div className="logo">Sort Visualizer</div>
+          <div className="logo">Sort and Search Visualizer</div>
           <div className="sort-form">
             <select name="sortName" onChange={this.onChange} className="pill form-select">
               <option disabled>Select a value</option>
@@ -114,6 +147,9 @@ class Home extends Component {
           </div>
           <div className="timer">
             Time Taken: 
+          </div>
+          <div className="nav-pills">
+            <a href="/search">Go to Search</a>
           </div>
         </header>
         <div className="container-div">
