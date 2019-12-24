@@ -1,4 +1,5 @@
 var arrayStates = [];
+var ranges = [];
 
 const partition = (arr, start, end) => {
   let pivot = arr[end];
@@ -15,6 +16,7 @@ const partition = (arr, start, end) => {
   let temp = arr[i+1];
   arr[i+1] = arr[end];
   arr[end] = temp;
+  ranges.push([start, end]);
   arrayStates.push([...arr]);
   return i+1;
 
@@ -30,13 +32,17 @@ const quickSortHelper = async (arr, start, end) => {
 
 export const quickSort = array => {
   arrayStates = [];
+  ranges = [];
   return new Promise(async(resolve, reject) => {
     let size = array.length;
-    arrayStates.push(array);
+    // arrayStates.push(array);
     await quickSortHelper(array, 0, size-1);
+    arrayStates.push([...array]);
+    ranges.push([-1, -1]);
     resolve({
       array: array,
-      arrayStates: arrayStates
+      arrayStates: arrayStates,
+      ranges: ranges
     });
   });
 };

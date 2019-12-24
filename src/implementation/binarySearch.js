@@ -28,11 +28,11 @@ const binarySearchHelper = (arr, start, end, x) => {
 export const binarySearch =  async (array, x) => {
   arrayStates = [];
   return new Promise(async (resolve, reject) => {
-    let size = array.length;
+    // let size = array.length;
 
     let result = await binarySearchHelper(array, 0, array.length-1, x);
 
-    console.log(arrayStates);
+    console.log(result);
 
     resolve({
       array: array,

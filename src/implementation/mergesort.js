@@ -1,4 +1,5 @@
 var arrayStates = [];
+var ranges = [];
 
 const merge = async (arr, start, mid, end) => {
   let n1 = mid-start+1;
@@ -44,6 +45,7 @@ const merge = async (arr, start, mid, end) => {
     j++;
   }
 
+  ranges.push([start, end]);
   arrayStates.push([...arr]);
 
 }
@@ -61,11 +63,15 @@ const mergeSortDriver = async (arr, start, end) => {
 export const mergeSort = array => {
   return new Promise(async (resolve, reject) => {
     arrayStates = [];
+    ranges = [];
     let size = array.length;
     await mergeSortDriver(array, 0, size-1);
+    arrayStates.push([...array]);
+    ranges.push([-1, -1]);
     resolve({
       array: array, 
-      arrayStates: arrayStates
+      arrayStates: arrayStates,
+      ranges: ranges
     });
   });
 };

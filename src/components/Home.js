@@ -20,7 +20,12 @@ class Home extends Component {
       sortName: 'mergeSort',
       size: "150",
       sortRunning: false,
-      array: []
+      array: [],
+      mergeSortRange: [],
+      quickSortRange: [],
+      heapSortRange: [],
+      bubbleSortRange: [],
+      randomQuickSortRange: []
     }
 
     this.sortButtonClick = this.sortButtonClick.bind(this);
@@ -36,15 +41,98 @@ class Home extends Component {
 
   PaintBlocks() {
     if (this.state.array.length > 0) {
-      return this.state.array.map((item, key) => (
-        <div style={{
-          backgroundColor: '#FF1744',
-          height: `${item}px`,
-          marginLeft: '5px',
-          transition: '.3s',
-          width: `5px`
-        }} key={key}></div>
-      ));
+      if (this.state.sortName === 'mergeSort') {
+        return this.state.array.map((item, key) => {
+          if (key >= this.state.mergeSortRange[0] && key <= this.state.mergeSortRange[1]) {
+            return <div style={{
+              backgroundColor: 'blue',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+          } else {
+            return <div style={{
+              backgroundColor: '#FF1744',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+          }
+        });
+      } else if (this.state.sortName === 'quickSort' || this.state.sortName === 'randomQuickSort') {
+        return this.state.array.map((item, key) => {
+          if (key >= this.state.quickSortRange[0] && key <= this.state.quickSortRange[1]) {
+            return <div style={{
+              backgroundColor: 'blue',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+          } else {
+            return <div style={{
+              backgroundColor: '#FF1744',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+          }
+        });
+      } else if (this.state.sortName === 'heapSort') {
+        return this.state.array.map((item, key) => {
+          if (key === this.state.heapSortRange[0] || key === this.state.heapSortRange[1]) {
+            return <div style={{
+              backgroundColor: 'blue',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+          } else {
+            return <div style={{
+              backgroundColor: '#FF1744',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+          }
+        });
+      } else if (this.state.sortName === 'bubbleSort') {
+        return this.state.array.map((item, key) => {
+          if (key === this.state.bubbleSortRange[0] || key === this.state.bubbleSortRange[1]) {
+            return <div style={{
+              backgroundColor: 'blue',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+          } else {
+            return <div style={{
+              backgroundColor: '#FF1744',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+          }
+        });
+      }
+      else {
+        return this.state.array.map((item, key) => {
+          return <div style={{
+            backgroundColor: '#FF1744',
+            height: `${item}px`,
+            marginLeft: '5px',
+            transition: '.3s',
+            width: `5px`
+          }} key={key}></div>
+        });
+      }
     } else {
       return null;
     }
@@ -53,16 +141,29 @@ class Home extends Component {
   sortButtonClick(e) {
     e.preventDefault();
 
+    this.setState({
+      mergeSortRange: [],
+      quickSortRange: [],
+      heapSortRange: [],
+      bubbleSortRange: [],
+      randomQuickSortRange: []
+    })
+
     switch (this.state.sortName) {
       case "mergeSort":
         generateRandomArray(Number.parseInt(this.state.size))
           .then(res => {
             mergeSort(res)
             .then(result => {
+              let ranges = result.ranges;
+              console.log(ranges);
+              console.log(result.arrayStates);
               let resSize = result.arrayStates.length;
               for (let i = 0; i < resSize; i++) {
                 setTimeout(() => {
+                  console.log(this.state.mergeSortRange)
                   this.setState({
+                    mergeSortRange: result.ranges[i],
                     array: result.arrayStates[i]
                   });
                 }, 150*i);
@@ -75,10 +176,14 @@ class Home extends Component {
           .then(res => {
             quickSort(res)
               .then(result => {
+                let ranges = result.ranges;
+                console.log(ranges);
+                console.log(result.arrayStates);
                 let resSize = result.arrayStates.length;
                 for (let i = 0; i < resSize; i++) {
                   setTimeout(() => {
                     this.setState({
+                      quickSortRange: result.ranges[i],
                       array: result.arrayStates[i]
                     });
                   }, 150*i);
@@ -90,16 +195,18 @@ class Home extends Component {
         generateRandomArray(Number.parseInt(this.state.size))
           .then(res => {
             heapSort(res)
-              .then(result => {
-                let resSize = result.arrayStates.length;
-                for (let i = 0; i < resSize; i++) {
-                  setTimeout(() => {
-                    this.setState({
-                      array: result.arrayStates[i]
-                    });
-                  }, 150*i);
-                }
-              });
+            .then(result => {
+              console.log(result);
+              let resSize = result.arrayStates.length;
+              for (let i = 0; i < resSize; i++) {
+                setTimeout(() => {
+                  this.setState({
+                    heapSortRange: result.ranges[i],
+                    array: result.arrayStates[i]
+                  });
+                }, 150*i);
+              }
+            });
           })
         break;
       case "bubbleSort":
@@ -110,7 +217,9 @@ class Home extends Component {
                 let resSize = result.arrayStates.length;
                 for (let i = 0; i < resSize; i++) {
                   setTimeout(() => {
+                    console.log(result.ranges[i]);
                     this.setState({
+                      bubbleSortRange: result.ranges[i],
                       array: result.arrayStates[i]
                     });
                   }, 150*i);
@@ -119,6 +228,22 @@ class Home extends Component {
           })
         break;
       case "randomQuickSort":
+        generateRandomArray(Number.parseInt(this.state.size))
+          .then(res => {
+            randomQuickSort(res)
+              .then(result => {
+                let resSize = result.arrayStates.length;
+                for (let i = 0; i < resSize; i++) {
+                  setTimeout(() => {
+                    console.log(result.ranges[i]);
+                    this.setState({
+                      quickSortRange: result.ranges[i],
+                      array: result.arrayStates[i]
+                    });
+                  }, 150*i);
+                }
+              })
+          })
         break;
       default:
         break;

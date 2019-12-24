@@ -73,17 +73,19 @@ class Search extends Component {
           transition: '.3s',
           padding: '10px 5px',
           color: 'white',
-          fontWeight: 'bolder'
+          fontWeight: 'bolder',
+          border: '1px solid black',
         }} key={key}>{item}</div>
         else
           return <div style={{
-            backgroundColor: 'pink',
+            backgroundColor: 'yellow',
             height: `${item*6}px`,
             marginLeft: '5px',
             transition: '.3s',
             padding: '10px 5px',
-            color: 'white',
-            fontWeight: 'bolder'
+            color: 'black',
+            fontWeight: 'bolder',
+            border: '1px solid black'
           }} key={key}>{item}</div>
       });
     } else {
@@ -95,8 +97,12 @@ class Search extends Component {
     let input = window.prompt("Enter a number to search");
     e.preventDefault();
 
+    this.setState({
+      array: []
+    })
+
     switch (this.state.searchName) {
-      case ("linearSearch"): {
+      case ("linearSearch"): 
         // use the random array as it is.
         linearSearch(this.state.array, Number.parseInt(input))
         .then(result => {
@@ -117,9 +123,8 @@ class Search extends Component {
             array: result.array
           });
         });
-      }
-      break;
-      case ("binarySearch"): {
+        break;
+      case ("binarySearch"):
         binarySearch(this.state.array, Number.parseInt(input))
           .then(result => {
             let size = result.arrayStates.length;
@@ -132,11 +137,9 @@ class Search extends Component {
               }, 200*i);
             }
           });
-      }
-      break;
-      default: {
         break;
-      }
+      default:
+        break;
     }
 
   }
