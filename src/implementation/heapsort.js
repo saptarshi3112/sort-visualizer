@@ -27,13 +27,13 @@ export const maxHeapify = (arr, size, index) => {
 
 }
 
-const buildMaxHeap = (arr, size) => {
+const buildMaxHeap = async (arr, size) => {
   for (let itr = size/2-1; itr >= 0; itr--) {
-    maxHeapify(arr, size, itr);
+    await maxHeapify(arr, size, itr);
   }
 }
 
-export const heapSort = async (array) => {
+export const heapSort = async array => {
 
   arrayStates = [];
   ranges = [];

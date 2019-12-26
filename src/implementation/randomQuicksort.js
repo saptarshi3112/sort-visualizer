@@ -5,8 +5,6 @@ const randomizedPartition = async (arr, start, end) => {
   // generate a random number
   let rand = Math.floor(Math.random() * ((end-1) - start + 1) + start);
 
-  console.log(rand);
-
   let temp = arr[rand];
   arr[rand] = arr[end];
   arr[end] = temp;

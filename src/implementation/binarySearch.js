@@ -3,7 +3,7 @@ var arrayStates = [];
 const binarySearchHelper = (arr, start, end, x) => {
   if (start <= end) {
     let mid = Math.floor((start+end)/2);
-    
+
     arrayStates.push({
       arr: [...arr],
       idx: mid
@@ -22,22 +22,18 @@ const binarySearchHelper = (arr, start, end, x) => {
     arr: [...arr],
     idx: -1
   });
+  
   return -1;
 }
 
 export const binarySearch =  async (array, x) => {
   arrayStates = [];
   return new Promise(async (resolve, reject) => {
-    // let size = array.length;
-
     let result = await binarySearchHelper(array, 0, array.length-1, x);
-
     console.log(result);
-
     resolve({
       array: array,
       arrayStates: arrayStates
     });
-
   });
 };

@@ -18,9 +18,7 @@ const merge = async (arr, start, mid, end) => {
     right_array[j] = arr[j+mid+1];
   }
 
-  i = 0;
-  j = 0;
-  k = start;
+  i = 0, j = 0, k = start;
   
   while (i < n1 && j < n2) {
     if (left_array[i] <= right_array[j]) {

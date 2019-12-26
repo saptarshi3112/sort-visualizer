@@ -35,6 +35,10 @@ class Home extends Component {
 
   onChange(e) {
     this.setState({
+      array: []
+    });
+
+    this.setState({
       [e.target.name]: e.target.value
     })
   }
@@ -42,65 +46,110 @@ class Home extends Component {
   PaintBlocks() {
     if (this.state.array.length > 0) {
       if (this.state.sortName === 'mergeSort') {
-        return this.state.array.map((item, key) => {
-          if (key >= this.state.mergeSortRange[0] && key <= this.state.mergeSortRange[1]) {
-            return <div style={{
-              backgroundColor: 'blue',
-              height: `${item}px`,
-              marginLeft: '5px',
-              transition: '.3s',
-              width: `5px`
-            }} key={key}></div>
-          } else {
-            return <div style={{
-              backgroundColor: '#FF1744',
-              height: `${item}px`,
-              marginLeft: '5px',
-              transition: '.3s',
-              width: `5px`
-            }} key={key}></div>
-          }
-        });
+
+        if (this.state.mergeSortRange[0] === -1 || this.state.mergeSortRange[1] === -1) {
+          return this.state.array.map((item, key) => {
+              return <div style={{
+                backgroundColor: '#6CE607',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+          });
+        } else {
+
+          return this.state.array.map((item, key) => {
+            if (key >= this.state.mergeSortRange[0] && key <= this.state.mergeSortRange[1]) {
+              return <div style={{
+                backgroundColor: 'blue',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+            } else {
+              return <div style={{
+                backgroundColor: '#FF1744',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+            }
+          });
+
+        }
+
+
       } else if (this.state.sortName === 'quickSort' || this.state.sortName === 'randomQuickSort') {
-        return this.state.array.map((item, key) => {
-          if (key >= this.state.quickSortRange[0] && key <= this.state.quickSortRange[1]) {
-            return <div style={{
-              backgroundColor: 'blue',
-              height: `${item}px`,
-              marginLeft: '5px',
-              transition: '.3s',
-              width: `5px`
-            }} key={key}></div>
-          } else {
-            return <div style={{
-              backgroundColor: '#FF1744',
-              height: `${item}px`,
-              marginLeft: '5px',
-              transition: '.3s',
-              width: `5px`
-            }} key={key}></div>
-          }
-        });
+
+        if (this.state.quickSortRange[0] === -1 || this.state.quickSortRange[1] === -1) {
+          return this.state.array.map((item, key) => {
+              return <div style={{
+                backgroundColor: '#6CE607',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+          });
+        } else {
+          return this.state.array.map((item, key) => {
+            if (key >= this.state.quickSortRange[0] && key <= this.state.quickSortRange[1]) {
+              return <div style={{
+                backgroundColor: 'blue',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+            } else {
+              return <div style={{
+                backgroundColor: '#FF1744',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+            }
+          });
+        }
+
       } else if (this.state.sortName === 'heapSort') {
-        return this.state.array.map((item, key) => {
-          if (key === this.state.heapSortRange[0] || key === this.state.heapSortRange[1]) {
-            return <div style={{
-              backgroundColor: 'blue',
-              height: `${item}px`,
-              marginLeft: '5px',
-              transition: '.3s',
-              width: `5px`
-            }} key={key}></div>
-          } else {
-            return <div style={{
-              backgroundColor: '#FF1744',
-              height: `${item}px`,
-              marginLeft: '5px',
-              transition: '.3s',
-              width: `5px`
-            }} key={key}></div>
-          }
-        });
+
+        if (this.state.heapSortRange[0] === -1 || this.state.heapSortRange[1] === -1) {
+          return this.state.array.map((item, key) => {
+              return <div style={{
+                backgroundColor: '#6CE607',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+          });
+        } else {
+          return this.state.array.map((item, key) => {
+            if (key === this.state.heapSortRange[0] || key === this.state.heapSortRange[1]) {
+              return <div style={{
+                backgroundColor: 'blue',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+            } else {
+              return <div style={{
+                backgroundColor: '#FF1744',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+            }
+          });
+        }
+
       } else if (this.state.sortName === 'bubbleSort') {
         return this.state.array.map((item, key) => {
           if (key === this.state.bubbleSortRange[0] || key === this.state.bubbleSortRange[1]) {
@@ -123,16 +172,60 @@ class Home extends Component {
         });
       }
       else {
-        return this.state.array.map((item, key) => {
-          return <div style={{
-            backgroundColor: '#FF1744',
-            height: `${item}px`,
-            marginLeft: '5px',
-            transition: '.3s',
-            width: `5px`
-          }} key={key}></div>
+
+        if (this.state.mergeSortRange[0] === -1 || this.state.mergeSortRange[1] === -1) {
+          return this.state.array.map((item, key) => {
+              return <div style={{
+                backgroundColor: '#6CE607',
+                height: `${item}px`,
+                marginLeft: '5px',
+                transition: '.3s',
+                width: `5px`
+              }} key={key}></div>
+          });
+        } else if (this.state.quickSortRange[0] === -1 || this.state.quickSortRange[1] === -1) {
+          return this.state.array.map((item, key) => {
+            return <div style={{
+              backgroundColor: '#6CE607',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
         });
+        } else if (this.state.heapSortRange[0] === -1 || this.state.heapSortRange[1] === -1) {
+          return this.state.array.map((item, key) => {
+            return <div style={{
+              backgroundColor: '#6CE607',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+        });
+        } else if (this.state.randomQuickSortRange[0] === -1 || this.state.randomQuickSortRange[1] === -1) {
+          return this.state.array.map((item, key) => {
+            return <div style={{
+              backgroundColor: '#6CE607',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+        });
+        } else {
+          return this.state.array.map((item, key) => {
+            return <div style={{
+              backgroundColor: '#FF1744',
+              height: `${item}px`,
+              marginLeft: '5px',
+              transition: '.3s',
+              width: `5px`
+            }} key={key}></div>
+          });
+        }
       }
+
     } else {
       return null;
     }
@@ -261,7 +354,6 @@ class Home extends Component {
               <option value="mergeSort">Merge Sort</option>
               <option value="quickSort">Quick Sort</option>
               <option value="heapSort">Heap Sort</option>
-              <option value="bubbleSort">Bubble Sort</option>
               <option value="randomQuickSort">Randomized Quick Sort</option>
             </select>
             <button 
