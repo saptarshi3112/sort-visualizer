@@ -18,7 +18,9 @@ const merge = async (arr, start, mid, end) => {
     right_array[j] = arr[j+mid+1];
   }
 
-  i = 0, j = 0, k = start;
+  i = 0;
+  j = 0;
+  k = start;
   
   while (i < n1 && j < n2) {
     if (left_array[i] <= right_array[j]) {
@@ -46,7 +48,7 @@ const merge = async (arr, start, mid, end) => {
   ranges.push([start, end]);
   arrayStates.push([...arr]);
 
-}
+};
 
 const mergeSortDriver = async (arr, start, end) => {
   if (start < end) {
@@ -56,7 +58,7 @@ const mergeSortDriver = async (arr, start, end) => {
     await merge(arr, start, mid, end);
   }
 
-}
+};
 
 export const mergeSort = array => {
   return new Promise(async (resolve, reject) => {
