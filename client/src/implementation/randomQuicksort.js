@@ -23,7 +23,7 @@ const randomizedPartition = async (arr, start, end) => {
   temp = arr[i+1];
   arr[i+1] = arr[end];
 	arr[end] = temp;
-	
+
 	ranges.push([start, end]);
   arrayStates.push([...arr]);
 
@@ -34,7 +34,7 @@ const randomQuickSortHelper = async (array, start, end) => {
   if (start < end) {
     let pi = await randomizedPartition(array, start, end);
     await randomQuickSortHelper(array, start, pi-1);
-    await randomQuickSortHelper(array, pi+1, end); 
+    await randomQuickSortHelper(array, pi+1, end);
   }
 }
 
@@ -45,8 +45,6 @@ export const randomQuickSort = array => {
     let size = array.length;
 
     await randomQuickSortHelper(array, 0, size-1);
-
-    console.log(array);
 
     arrayStates.push([...array]);
     ranges.push([-1, -1]);
