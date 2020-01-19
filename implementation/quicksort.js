@@ -30,7 +30,7 @@ const quickSortHelper = async (arr, start, end) => {
   }
 }
 
-export const quickSort = array => {
+module.exports.quickSort = array => {
   arrayStates = [];
   ranges = [];
   return new Promise(async(resolve, reject) => {

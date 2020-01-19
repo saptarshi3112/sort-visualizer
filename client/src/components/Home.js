@@ -3,6 +3,14 @@ import React, {
   Fragment
 } from 'react';
 
+import {
+  connect
+} from 'react-redux';
+
+import {
+  computeSort
+} from '../actions/sortAction';
+
 import "./Home.css";
 
 import { generateRandomArray } from '../implementation/randomArray';
@@ -29,8 +37,15 @@ class Home extends Component {
     }
 
     this.sortButtonClick = this.sortButtonClick.bind(this);
+
+    this.sortButtonClick2 = this.sortButtonClick2.bind(this);
+
     this.PaintBlocks = this.PaintBlocks.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount () {
+    console.log(this.props.sort); 
   }
 
   onChange(e) {
@@ -240,7 +255,7 @@ class Home extends Component {
       heapSortRange: [],
       bubbleSortRange: [],
       randomQuickSortRange: []
-    })
+    });
 
     switch (this.state.sortName) {
       case "mergeSort":
@@ -343,6 +358,32 @@ class Home extends Component {
     }
   }
 
+  sortButtonClick2 (e) {
+    e.preventDefault();
+
+    switch (this.state.sortName) {
+      case "mergeSort":
+        console.log('ms');
+        generateRandomArray(Number.parseInt(this.state.size)) 
+          .then(res => {
+            this.props.computeSort(res, this.state.sortName);
+          });
+        break;
+      case "quickSort":
+        console.log('qs');
+        break;
+      case "heapSort":
+        console.log('hs');
+        break;
+      case "randomQuickSort":
+        console.log('rqs');
+        break;
+      default:
+        break;
+    }
+
+  }
+
   render() { 
     return (
       <Fragment>
@@ -380,5 +421,11 @@ class Home extends Component {
     );
   }
 }
- 
-export default Home;
+
+const mapStateToProps = state => ({
+  sort: state.sort
+});
+
+export default connect(mapStateToProps, {
+  computeSort
+})(Home);

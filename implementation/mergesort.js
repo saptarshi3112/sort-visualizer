@@ -60,7 +60,7 @@ const mergeSortDriver = async (arr, start, end) => {
 
 };
 
-export const mergeSort = array => {
+module.exports.mergeSort = array => {
   return new Promise(async (resolve, reject) => {
     arrayStates = [];
     ranges = [];
